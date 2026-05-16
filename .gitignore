@@ -1,31 +1,50 @@
 # dependencies
-node_modules
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Next.js
-.next
-out
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
 
 # production
-build
-dist
+/build
 
-# local env files
-.env
-.env*.local
-config.local.json
+# misc
+.DS_Store
+*.pem
 
-# local app storage
-storage/*
-!storage/.gitkeep
-.cache
-
-# logs
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+.pnpm-debug.log*
 
-# system files
-.DS_Store
-# TypeScript
+# env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
 *.tsbuildinfo
+next-env.d.ts
+
+# local config (contains real paths)
+config.local.json
+
+# storage / cache
+/storage/*
+!/storage/.gitkeep
+
+# database
+*.db
+*.db-journal

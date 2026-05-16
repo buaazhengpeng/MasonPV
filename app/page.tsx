@@ -1,34 +1,28 @@
-import type { MediaType } from "@/lib/db";
-import { countMediaItems, listMediaItems } from "@/lib/db";
-import { AppShell } from "@/components/app-shell";
-import { MediaFilterBar } from "@/components/media-filter-bar";
-import { MediaGrid } from "@/components/media-grid";
+import { Badge } from "@/components/ui/badge";
 
-export const dynamic = "force-dynamic";
-
-type HomePageProps = {
-  searchParams: Promise<{
-    search?: string;
-    type?: string;
-  }>;
-};
-
-function parseMediaType(value?: string): MediaType | "all" {
-  return value === "image" || value === "video" ? value : "all";
-}
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const params = await searchParams;
-  const type = parseMediaType(params.type);
-  const search = params.search ?? "";
-  const query = { search, type };
-  const items = listMediaItems(query);
-  const total = countMediaItems(query);
-
+export default function Home() {
   return (
-    <AppShell>
-      <MediaFilterBar search={search} total={total} type={type} />
-      <MediaGrid items={items} />
-    </AppShell>
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+        <h1 className="text-4xl font-bold tracking-tight mb-4">
+          Welcome to MasonPV
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-md mb-6">
+          Your personal local media browser for photos and videos.
+          Configure your media directories to get started.
+        </p>
+        <div className="flex gap-2 mb-8">
+          <Badge variant="secondary">Photos</Badge>
+          <Badge variant="secondary">Videos</Badge>
+          <Badge variant="secondary">Local-first</Badge>
+        </div>
+        <a
+          href="/settings"
+          className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          Configure Media Directories
+        </a>
+      </div>
+    </div>
   );
 }
