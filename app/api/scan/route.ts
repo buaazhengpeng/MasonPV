@@ -1,18 +1,24 @@
 import { NextResponse } from "next/server";
+import { getLatestScanJob } from "@/lib/db";
+import { scanMediaRoots } from "@/lib/media/scanner";
 
 export async function GET() {
   return NextResponse.json({
-    status: "idle",
-    message: "Scan status API scaffold is ready.",
+    latestJob: getLatestScanJob(),
   });
 }
 
 export async function POST() {
-  return NextResponse.json(
-    {
-      status: "not_implemented",
-      message: "Media scanning will be implemented in the next milestone.",
-    },
-    { status: 501 },
-  );
+  try {
+    const summary = await scanMediaRoots();
+    return NextResponse.json({ summary });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "Media scan failed.",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    );
+  }
 }

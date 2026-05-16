@@ -1,9 +1,12 @@
+import type { MediaItem } from "@/lib/db";
+
 export type ThumbnailResult = {
-  path: string;
-  width: number;
-  height: number;
+  path: string | null;
+  width: number | null;
+  height: number | null;
 };
 
-export async function ensureThumbnail(): Promise<ThumbnailResult> {
-  throw new Error("Thumbnail generation will be implemented in the next milestone.");
+export async function ensureThumbnail(mediaItem: MediaItem): Promise<ThumbnailResult> {
+  void mediaItem;
+  return { path: null, width: null, height: null };
 }
