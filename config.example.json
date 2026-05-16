@@ -1,0 +1,16 @@
+{
+  "mediaRoots": [
+    {
+      "name": "Photos",
+      "path": "/path/to/photos"
+    },
+    {
+      "name": "Videos",
+      "path": "/path/to/videos"
+    }
+  ],
+  "includeExtensions": [".jpg", ".jpeg", ".png", ".webp", ".gif", ".mp4", ".mov", ".mkv", ".webm"],
+  "excludePatterns": ["**/.DS_Store", "**/node_modules/**", "**/.cache/**"],
+  "listenHost": "127.0.0.1",
+  "listenPort": 3000
+}
